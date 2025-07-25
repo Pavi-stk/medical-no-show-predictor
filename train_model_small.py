@@ -1,5 +1,6 @@
 import pandas as pd
 import joblib
+import gzip
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -32,7 +33,8 @@ model = RandomForestClassifier(n_estimators=50, random_state=42)
 model.fit(X_train, y_train)
 
 # Save smaller model
-joblib.dump(model, "model_small.pkl")
+with gzip.open("model_small.pkl.gz", "rb") as f:
+    model = joblib.load(f)
 
 print("✅ Smaller model saved as model_small.pkl")
 
