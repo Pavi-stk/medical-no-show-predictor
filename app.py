@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import gzip
 
 # Load the model
-model = joblib.load('model_small.pkl')
-
+with gzip.open('model_small.pkl.gz', 'rb') as f:
+    model = joblib.load(f)
 
 st.title("🩺 Medical Appointment No-show Predictor")
 
